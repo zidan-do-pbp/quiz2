@@ -1,0 +1,6 @@
+# Django 5.2 LTS: Python 3.10 sampai 3.14, jadi aman di versi Python lab yang belum diketahui.
+# ~= mengunci ke seri 5.2.x, patch keamanan tetap masuk.
+# Semua yang dibutuhkan notes (UserCreationForm, AuthenticationForm, login_required,
+# Group, prefetch_related) bawaan Django. Tidak butuh DRF: endpoint JSON ditulis manual
+# dengan JsonResponse.
+Django~=5.2.0

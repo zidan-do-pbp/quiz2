@@ -1,0 +1,18 @@
+# Virtual environment
+env/
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# IDE
+.idea/
+.vscode/
+
+# Secret lokal
+.env
+
+# db.sqlite3 SENGAJA tidak di-ignore: di asistensi, data seed dari shell
+# di-push bersama sqlite supaya lab langsung punya data.
