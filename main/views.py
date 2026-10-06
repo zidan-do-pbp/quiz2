@@ -56,3 +56,88 @@ def logout_user(request):
        (cookie dihapus pada response yang sama dengan redirect)
     """
     raise NotImplementedError('TODO: logout_user')
+
+
+# ---------------------------------------------------------------------------
+# Fase 2 / A2 (notes C2): role dan CRUD Project
+# ---------------------------------------------------------------------------
+from django.contrib.auth.decorators import login_required  # noqa: E402
+from django.http import HttpResponseForbidden  # noqa: E402
+from django.shortcuts import get_object_or_404  # noqa: E402
+
+from main.forms import ProjectForm  # noqa: E402
+from main.models import Project  # noqa: E402
+
+
+def is_owner(user):
+    """# VERIFY: definisi is_owner TIDAK ada di notes, kita putuskan sendiri.
+
+    TODO: return user.groups.filter(name='Owner').exists()
+    """
+    raise NotImplementedError('TODO: is_owner')
+
+
+def is_editor(user):
+    """# VERIFY: sama, definisi kita sendiri.
+
+    TODO: return user.groups.filter(name='Editor').exists()
+    """
+    raise NotImplementedError('TODO: is_editor')
+
+
+# TODO: pasang @login_required(login_url=...) di semua view di bawah.
+#       # VERIFY: bentuk login_url (path '/login/' atau nama route 'main:login')
+
+
+def project_list(request):
+    """TODO:
+    1. projects = Project.objects.select_related('owner').prefetch_related('starred_by')
+       (prefetch supaya starred_by tidak N+1 query di template)
+    2. render project_list.html dengan context:
+       {'projects': projects, 'is_owner': is_owner(request.user),
+        'is_editor': is_editor(request.user)}
+    """
+    raise NotImplementedError('TODO: project_list')
+
+
+def project_create(request):
+    """TODO:
+    1. Izin DULU: bukan Owner -> return HttpResponseForbidden()  # 403
+    2. form = ProjectForm(request.POST or None)
+    3. POST + valid: obj = form.save(commit=False); obj.owner = request.user;
+       obj.save(); redirect('main:project_list')
+    4. Selain itu render project_form.html {'form': form, 'title': 'Buat project'}
+    """
+    raise NotImplementedError('TODO: project_create')
+
+
+def project_edit(request, pk):
+    """TODO:
+    1. Izin DULU: bukan (Owner atau Editor) -> 403
+    2. BARU project = get_object_or_404(Project, pk=pk)   # 404 kalau tidak ada
+       (urutan ini yang ditanya kuis: 403 vs 404)
+    3. form = ProjectForm(request.POST or None, instance=project)
+    4. POST + valid: form.save(); redirect('main:project_list')
+    5. Selain itu render project_form.html {'form': form, 'title': 'Edit project'}
+    """
+    raise NotImplementedError('TODO: project_edit')
+
+
+def project_delete(request, pk):
+    """TODO:
+    1. Bukan POST -> HttpResponseNotAllowed(['POST'])  # 405
+    2. Izin: bukan Owner -> 403
+    3. project = get_object_or_404(Project, pk=pk); project.delete()
+    4. redirect('main:project_list')
+    """
+    raise NotImplementedError('TODO: project_delete')
+
+
+def toggle_star(request, pk):
+    """TODO:
+    1. Bukan POST -> 405
+    2. project = get_object_or_404(Project, pk=pk)
+    3. Kalau request.user sudah ada di project.starred_by: .remove(user), selain itu .add(user)
+    4. redirect('main:project_list')
+    """
+    raise NotImplementedError('TODO: toggle_star')

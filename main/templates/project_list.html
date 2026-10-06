@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Projects{% endblock %}
+{% block content %}
+<h1>Projects</h1>
+{% if is_owner %}<p><a href="{% url 'main:project_create' %}">+ Project baru</a></p>{% endif %}
+{% for p in projects %}
+  <div>
+    <h3>{{ p.name }}</h3>
+    <p>{{ p.description }}</p>
+    <small>owner: {{ p.owner.username }} | bintang: {{ p.starred_by.all|length }}</small>
+    <form method="post" action="{% url 'main:toggle_star' p.pk %}" style="display:inline">
+      {% csrf_token %}
+      <button type="submit">{% if user in p.starred_by.all %}Unstar{% else %}Star{% endif %}</button>
+    </form>
+    {% if is_owner or is_editor %}<a href="{% url 'main:project_edit' p.pk %}">Edit</a>{% endif %}
+    {% if is_owner %}
+    <form method="post" action="{% url 'main:project_delete' p.pk %}" style="display:inline">
+      {% csrf_token %}
+      <button type="submit">Hapus</button>
+    </form>
+    {% endif %}
+  </div>
+{% empty %}
+  <p>Belum ada project.</p>
+{% endfor %}
+{% endblock %}
