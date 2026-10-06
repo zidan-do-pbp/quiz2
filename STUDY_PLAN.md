@@ -24,7 +24,7 @@ Letakkan file ini di root repo (`quiz2\STUDY_PLAN.md`). Centang fase yang sudah 
 
 Prioritas kuis (dikonfirmasi dosen): JavaScript, halaman login + CSRF + kirim data ke DB, pembatasan halaman untuk user login. Karena itu fase 1, 3, dan 4-6 paling penting.
 
-- [ ] **Fase 0: Persiapan.** Cek `INSTALLED_APPS` berisi `main`, cek `TEMPLATES`/`STATICFILES_DIRS`, buat branch `belajar`, buat `STUDY_LOG.md`. Tidak ada kode latihan.
+- [x] **Fase 0: Persiapan.** Cek `INSTALLED_APPS` berisi `main`, cek `TEMPLATES`/`STATICFILES_DIRS`, buat branch `belajar`, buat `STUDY_LOG.md`. Tidak ada kode latihan.
 - [ ] **Fase 1: A1 (C1) register, login, logout.**
   - File: `main/urls.py`, `main/views.py`, `main/templates/{base,home,register,login}.html`, `include` di `quiz2_prep/urls.py`.
   - Latihan: `UserCreationForm`, `AuthenticationForm`, `login()`, cookie `last_login` (+ `max_age`, `httponly`, `samesite`), logout POST-only (405) dan `delete_cookie`.

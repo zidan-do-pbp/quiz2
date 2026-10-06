@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<h1>Home</h1>
+{% if request.COOKIES.last_login %}
+  <p>last_login: {{ request.COOKIES.last_login }}</p>
+{% endif %}
+{% endblock %}

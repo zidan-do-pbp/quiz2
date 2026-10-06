@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}quiz2{% endblock %}</title>
+  {# Sengaja tanpa Google Fonts/CDN: jaringan lab bisa dibatasi. #}
+</head>
+<body>
+  <nav>
+    <a href="{% url 'main:home' %}">Home</a>
+    {% if user.is_authenticated %}
+      | Halo, {{ user.username }}
+      <form method="post" action="{% url 'main:logout' %}" style="display:inline">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+      </form>
+    {% else %}
+      | <a href="{% url 'main:login' %}">Login</a>
+      | <a href="{% url 'main:register' %}">Register</a>
+    {% endif %}
+  </nav>
+  <hr>
+  {% block content %}{% endblock %}
+</body>
+</html>
